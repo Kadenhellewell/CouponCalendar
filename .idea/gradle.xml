@@ -13,7 +13,7 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/API" />
-            <option value="$PROJECT_DIR$/PhoneStarter" />
+            <option value="$PROJECT_DIR$/CouponCalendarPhone" />
             <option value="$PROJECT_DIR$/WatchStarter" />
           </set>
         </option>

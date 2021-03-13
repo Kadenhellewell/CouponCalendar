@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "522293358477",
+    "project_id": "coupon-calendar-3e828",
+    "storage_bucket": "coupon-calendar-3e828.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:522293358477:android:af900f4485b90b694d57c4",
+        "android_client_info": {
+          "package_name": "com.kadenhellewellcouponcalendar.phoneapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "522293358477-21m4jkipet5kdh0to7ku2n6p3iabi08e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTYp6emH_mOA9BvG17nAiZAr0cEsF-VWE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "522293358477-21m4jkipet5kdh0to7ku2n6p3iabi08e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
