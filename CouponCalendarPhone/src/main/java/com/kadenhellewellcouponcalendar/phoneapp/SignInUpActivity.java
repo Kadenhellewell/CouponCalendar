@@ -12,12 +12,12 @@ import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 // If the user is signed in, it will redirect to HomeActivity
 
 public class SignInUpActivity extends AppCompatActivity {
-    UserViewModel viewModel;
+    UserViewModel userViewModel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in_up);
-        viewModel = new ViewModelProvider(this).get(UserViewModel.class);
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragment_container, SignInFragment.class, null)
@@ -29,7 +29,7 @@ public class SignInUpActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        viewModel.getUser().observe(this, (user) -> {
+        userViewModel.getUser().observe(this, (user) -> {
             if (user != null) {
                 Intent intent = new Intent(this, HomeActivity.class);
                 startActivity(intent);
