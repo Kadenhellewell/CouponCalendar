@@ -37,7 +37,8 @@
             android:id="@+id/signIn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign Un" />
+            android:gravity="center"
+            android:text="Sign Up" />
     </LinearLayout>
 
 </FrameLayout>
