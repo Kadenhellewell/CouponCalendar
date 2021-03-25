@@ -17,7 +17,6 @@ import com.kadenhellewellcouponcalendar.api.models.User;
 public class CouponViewModel extends ViewModel {
     private ObservableArrayList<Coupon> coupons;
     private DatabaseReference db;
-    //MutableLiveData<User> user = new MutableLiveData<>();
 
     public CouponViewModel()
     {
@@ -70,7 +69,6 @@ public class CouponViewModel extends ViewModel {
 
     public void addCoupon(Coupon newCoupon, MutableLiveData<User> user)
     {
-        //TODO somehow connect this to the user specific stuff in the UserViewModel
         if (user.getValue() == null) return;
         db.child("userData").child(user.getValue().uid).child("coupons").push().setValue(newCoupon);
     }
