@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:autofillHints="Company"
+    tools:context=".NewCouponFragment">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:text="New Coupon" />
+
+        <EditText
+            android:id="@+id/companyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Company"
+            android:ems="10"
+            android:hint="Company"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Category"
+            android:ems="10"
+            android:hint="Category"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/deal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Deal description"
+            android:ems="10"
+            android:gravity="start|top"
+            android:hint="Deal description"
+            android:inputType="textMultiLine" />
+
+        <EditText
+            android:id="@+id/expDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Expiration Date"
+            android:ems="10"
+            android:hint="Expiration Date"
+            android:inputType="date" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autofillHints="Address"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPostalAddress" />
+
+        <Button
+            android:id="@+id/addCouponButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Coupon" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

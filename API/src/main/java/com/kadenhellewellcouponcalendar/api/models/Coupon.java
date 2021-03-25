@@ -11,7 +11,6 @@ public class Coupon {
     public String expDate;
     public String address;
 
-
     @Exclude
     public String id;
 
