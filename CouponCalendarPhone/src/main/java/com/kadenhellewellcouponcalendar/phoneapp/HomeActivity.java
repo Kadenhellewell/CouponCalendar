@@ -2,6 +2,7 @@ package com.kadenhellewellcouponcalendar.phoneapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
@@ -34,6 +35,11 @@ public class HomeActivity extends AppCompatActivity {
             {
                 case R.id.home_item:
                     //TODO redirect to home fragment
+                    redirectToFragment(HomeFragment.class);
+                    break;
+                case R.id.coupons_item:
+                    //TODO redirect to coupons fragment
+                    redirectToFragment(CouponsFragment.class);
                     break;
                 case R.id.sign_out_item:
                     userViewModel.signOut();
@@ -45,5 +51,21 @@ public class HomeActivity extends AppCompatActivity {
             drawer.close();
             return true;
         });
+
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_container, HomeFragment.class, null)
+                    .setReorderingAllowed(true)
+                    .commit();
+        }
+    }
+
+    public void redirectToFragment(Class fragment)
+    {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment, null)
+                .setReorderingAllowed(true)
+                .addToBackStack(null)
+                .commit();
     }
 }

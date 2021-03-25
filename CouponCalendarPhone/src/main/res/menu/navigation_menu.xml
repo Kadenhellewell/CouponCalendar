@@ -10,12 +10,8 @@
         />
         <!-- android:icon="@drawable/ic_baseline_home_24" -->
         <item
-            android:id="@+id/profile_item"
-            android:title="Profile"
-            />
-        <item
-            android:id="@+id/settings_item"
-            android:title="Settings"
+            android:id="@+id/coupons_item"
+            android:title="Coupons"
             />
 
         <item

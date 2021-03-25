@@ -9,9 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
-public class HomeFragment extends Fragment {
-    public HomeFragment() {
-        super(R.layout.activity_home);
+public class CouponsFragment extends Fragment {
+    public CouponsFragment() {
+        super(R.layout.fragment_coupons);
     }
 
 
