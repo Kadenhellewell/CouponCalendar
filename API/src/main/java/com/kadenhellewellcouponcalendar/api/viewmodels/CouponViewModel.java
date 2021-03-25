@@ -76,9 +76,9 @@ public class CouponViewModel extends ViewModel {
     }
 
     // Call this when a coupon gets used or expires.
-    public void removeCoupon(Coupon usedCoupon)
+    public void removeCoupon(Coupon usedCoupon, MutableLiveData<User> user)
     {
-        //TODO make sure this also updates firebase
-        coupons.remove(usedCoupon);
+        //TODO learn correct syntax for this.
+        db.child("userData").child(user.getValue().uid).child("coupons");
     }
 }
