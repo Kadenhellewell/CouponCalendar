@@ -11,34 +11,54 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Sign Up" />
+            android:text="Sign Up"
+            android:textSize="24sp" />
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailEditText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress" />
+            android:paddingHorizontal="16dp">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textWebEmailAddress" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/passwordEditText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword" />
+            android:paddingHorizontal="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/signIn"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Sign Up" />
+            android:text="Sign Up"
+            android:translationX="16dp" />
+
+        <Button
+            android:id="@+id/signInLink"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account? Sign In"
+            style="@style/Widget.MaterialComponents.Button.TextButton"/>
     </LinearLayout>
 
 </FrameLayout>

@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.kadenhellewellcouponcalendar.api.models.Coupon;
 import com.kadenhellewellcouponcalendar.api.viewmodels.CouponViewModel;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
@@ -31,17 +32,17 @@ public class NewCouponFragment extends Fragment {
         CouponViewModel couponViewModel = new ViewModelProvider(getActivity()).get(CouponViewModel.class);
         Button addCoupon = view.findViewById(R.id.addCouponButton);
         addCoupon.setOnClickListener(v -> {
-            EditText companyEditText = view.findViewById(R.id.companyName);
-            EditText categoryEditText = view.findViewById(R.id.category);
-            EditText dealEditText = view.findViewById(R.id.deal);
-            EditText expEditText = view.findViewById(R.id.expDate);
-            EditText addressEditText = view.findViewById(R.id.address);
+            TextInputLayout companyEditText = view.findViewById(R.id.companyName);
+            TextInputLayout categoryEditText = view.findViewById(R.id.category);
+            TextInputLayout dealEditText = view.findViewById(R.id.deal);
+            TextInputLayout expEditText = view.findViewById(R.id.expDate);
+            TextInputLayout addressEditText = view.findViewById(R.id.address);
             Coupon coupon = new Coupon(
-                    companyEditText.getText().toString(),
-                    categoryEditText.getText().toString(),
-                    dealEditText.getText().toString(),
-                    expEditText.getText().toString(),
-                    addressEditText.getText().toString()
+                    companyEditText.getEditText().getText().toString(),
+                    categoryEditText.getEditText().getText().toString(),
+                    dealEditText.getEditText().getText().toString(),
+                    expEditText.getEditText().getText().toString(),
+                    addressEditText.getEditText().getText().toString()
             );
 
             couponViewModel.addCoupon(coupon, userViewModel.getUser());

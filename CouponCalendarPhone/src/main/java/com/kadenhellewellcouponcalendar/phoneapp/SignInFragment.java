@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 
 
@@ -25,14 +26,15 @@ public class SignInFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         UserViewModel userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
-        EditText email = view.findViewById(R.id.emailEditText);
-        EditText password = view.findViewById(R.id.passwordEditText);
+        TextInputLayout email = view.findViewById(R.id.emailEditText);
+        TextInputLayout password = view.findViewById(R.id.passwordEditText);
         Button signIn = view.findViewById(R.id.signIn);
         Button signUp = view.findViewById(R.id.signUpLink);
         signIn.setOnClickListener(v -> {
+            //TODO verify valid input
             userViewModel.signIn(
-                    email.getText().toString(),
-                    password.getText().toString()
+                    email.getEditText().getText().toString(),
+                    password.getEditText().getText().toString()
             );
         });
 

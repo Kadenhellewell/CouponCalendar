@@ -19,60 +19,88 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="82dp"
-            android:text="New Coupon" />
+            android:layout_height="56dp"
+            android:gravity="center"
+            android:text="New Coupon"
+            android:textSize="24sp" />
 
-        <EditText
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/companyName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Company"
-            android:ems="10"
             android:hint="Company"
-            android:inputType="textPersonName" />
+            android:paddingHorizontal="16dp">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/category"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Category"
-            android:ems="10"
             android:hint="Category"
-            android:inputType="textPersonName" />
+            android:paddingHorizontal="16dp">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/deal"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Deal description"
-            android:ems="10"
-            android:gravity="start|top"
-            android:hint="Deal description"
-            android:inputType="textMultiLine" />
+            android:hint="Deal"
+            android:paddingHorizontal="16dp">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/expDate"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Expiration Date"
-            android:ems="10"
             android:hint="Expiration Date"
-            android:inputType="date" />
+            android:paddingHorizontal="16dp">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/address"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="Address"
-            android:ems="10"
             android:hint="Address"
-            android:inputType="textPostalAddress" />
+            android:paddingHorizontal="16dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/addCouponButton"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Coupon" />
+            android:inputType="textPostalAddress"
+            android:text="Add Coupon"
+            android:translationX="16dp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
