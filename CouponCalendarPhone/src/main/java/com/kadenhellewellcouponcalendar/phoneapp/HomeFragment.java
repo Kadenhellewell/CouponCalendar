@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 public class HomeFragment extends Fragment {
     public HomeFragment() {
-        super(R.layout.activity_home);
+        super(R.layout.fragment_home);
     }
 
 

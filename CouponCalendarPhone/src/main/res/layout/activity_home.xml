@@ -22,7 +22,7 @@
                 android:layout_height="?attr/actionBarSize"
                 app:layout_scrollFlags="scroll|enterAlways|snap"
                 app:navigationIcon="@drawable/ic_baseline_menu_24"
-                app:title="Home Activity" />
+                app:title="Coupon Calendar" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -33,6 +33,17 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             >
         </androidx.fragment.app.FragmentContainerView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_baseline_add_24" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

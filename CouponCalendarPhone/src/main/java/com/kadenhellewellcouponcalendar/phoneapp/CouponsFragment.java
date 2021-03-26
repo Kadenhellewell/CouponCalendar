@@ -43,13 +43,6 @@ public class CouponsFragment extends Fragment {
         couponList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
 
-        FloatingActionButton fab = view.findViewById(R.id.fab);
-        fab.setOnClickListener(v -> {
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, NewCouponFragment.class, null)
-                    .setReorderingAllowed(true)
-                    .addToBackStack(null)
-                    .commit();
-        });
+
     }
 }

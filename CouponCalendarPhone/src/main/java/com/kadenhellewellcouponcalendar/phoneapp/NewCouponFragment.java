@@ -51,6 +51,6 @@ public class NewCouponFragment extends Fragment {
                     .setReorderingAllowed(true)
                     .addToBackStack(null)
                     .commit();
-        });
+         });
     }
 }

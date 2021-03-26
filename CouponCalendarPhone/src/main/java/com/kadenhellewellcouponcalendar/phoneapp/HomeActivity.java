@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 
@@ -34,11 +35,9 @@ public class HomeActivity extends AppCompatActivity {
             switch (menuItem.getItemId())
             {
                 case R.id.home_item:
-                    //TODO redirect to home fragment
                     redirectToFragment(HomeFragment.class);
                     break;
                 case R.id.coupons_item:
-                    //TODO redirect to coupons fragment
                     redirectToFragment(CouponsFragment.class);
                     break;
                 case R.id.sign_out_item:
@@ -50,6 +49,11 @@ public class HomeActivity extends AppCompatActivity {
             }
             drawer.close();
             return true;
+        });
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(v -> {
+            redirectToFragment(NewCouponFragment.class);
         });
 
         if (savedInstanceState == null) {
