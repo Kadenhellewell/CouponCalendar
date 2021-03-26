@@ -42,5 +42,4 @@
             android:layout_gravity="left"
             android:text="Use Coupon" />
     </LinearLayout>
-
 </com.google.android.material.card.MaterialCardView>

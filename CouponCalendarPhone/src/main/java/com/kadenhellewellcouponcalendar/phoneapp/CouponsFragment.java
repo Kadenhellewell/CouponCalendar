@@ -31,6 +31,7 @@ public class CouponsFragment extends Fragment {
         UserViewModel userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
         RecyclerView couponList = view.findViewById(R.id.couponList);
         CouponViewModel couponViewModel = new ViewModelProvider(getActivity()).get(CouponViewModel.class);
+        couponViewModel.setUser(userViewModel.getUser());
         CouponsAdapter adapter = new CouponsAdapter(
                 couponViewModel.getCoupons(),
                 (coupon -> {
@@ -41,8 +42,5 @@ public class CouponsFragment extends Fragment {
 
         couponList.setAdapter(adapter);
         couponList.setLayoutManager(new LinearLayoutManager(getActivity()));
-
-
-
     }
 }

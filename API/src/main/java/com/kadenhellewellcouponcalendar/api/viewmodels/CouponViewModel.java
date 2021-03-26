@@ -1,5 +1,7 @@
 package com.kadenhellewellcouponcalendar.api.viewmodels;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.ObservableArrayList;
@@ -17,12 +19,18 @@ import com.kadenhellewellcouponcalendar.api.models.User;
 public class CouponViewModel extends ViewModel {
     private ObservableArrayList<Coupon> coupons;
     private DatabaseReference db;
+    MutableLiveData<User> user;
 
     public CouponViewModel()
     {
         db = FirebaseDatabase.getInstance().getReference();
         coupons = new ObservableArrayList<Coupon>();
         loadCoupons();
+    }
+
+    public void setUser(MutableLiveData<User> user)
+    {
+        this.user = user;
     }
 
     public ObservableArrayList<Coupon> getCoupons()
@@ -32,7 +40,12 @@ public class CouponViewModel extends ViewModel {
 
     private void loadCoupons()
     {
-        db.child("/coupons").addChildEventListener(new ChildEventListener() {
+        if (user == null)
+        {
+            Log.d("User error", "Call setUser");
+            return;
+        }
+        db.child("userData").child(user.getValue().uid).child("coupons").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Coupon coupon = snapshot.getValue(Coupon.class);
