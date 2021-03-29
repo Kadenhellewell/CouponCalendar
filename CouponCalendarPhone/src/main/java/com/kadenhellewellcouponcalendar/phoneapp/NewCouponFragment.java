@@ -30,6 +30,7 @@ public class NewCouponFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         UserViewModel userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
         CouponViewModel couponViewModel = new ViewModelProvider(getActivity()).get(CouponViewModel.class);
+        couponViewModel.setUser(userViewModel.getUser());
         Button addCoupon = view.findViewById(R.id.addCouponButton);
         addCoupon.setOnClickListener(v -> {
             TextInputLayout companyEditText = view.findViewById(R.id.companyName);
@@ -45,7 +46,7 @@ public class NewCouponFragment extends Fragment {
                     addressEditText.getEditText().getText().toString()
             );
 
-            couponViewModel.addCoupon(coupon, userViewModel.getUser());
+            couponViewModel.addCoupon(coupon);
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, CouponsFragment.class, null)
                     .setReorderingAllowed(true)

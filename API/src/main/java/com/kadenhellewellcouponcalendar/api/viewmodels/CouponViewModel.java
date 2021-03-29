@@ -24,8 +24,8 @@ public class CouponViewModel extends ViewModel {
     public CouponViewModel()
     {
         db = FirebaseDatabase.getInstance().getReference();
-        coupons = new ObservableArrayList<Coupon>();
-        loadCoupons();
+//        coupons = new ObservableArrayList<Coupon>();
+//        loadCoupons();
     }
 
     public void setUser(MutableLiveData<User> user)
@@ -35,6 +35,11 @@ public class CouponViewModel extends ViewModel {
 
     public ObservableArrayList<Coupon> getCoupons()
     {
+        if (coupons == null)
+        {
+            coupons = new ObservableArrayList<Coupon>();
+            loadCoupons();
+        }
         return coupons;
     }
 
@@ -47,7 +52,7 @@ public class CouponViewModel extends ViewModel {
         }
         db.child("userData").child(user.getValue().uid).child("coupons").addChildEventListener(new ChildEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+            public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { 
                 Coupon coupon = snapshot.getValue(Coupon.class);
                 coupon.id = snapshot.getKey();
                 coupons.add(coupon);
@@ -80,7 +85,7 @@ public class CouponViewModel extends ViewModel {
         });
     }
 
-    public void addCoupon(Coupon newCoupon, MutableLiveData<User> user)
+    public void addCoupon(Coupon newCoupon)
     {
         if (user.getValue() == null) return;
         db.child("userData").child(user.getValue().uid).child("coupons").push().setValue(newCoupon);

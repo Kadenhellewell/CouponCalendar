@@ -24,13 +24,11 @@ public class CouponsAdapter extends CustomAdapter<Coupon>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Coupon coupon = data.get(position);
         TextView company = holder.getItemView().findViewById(R.id.company);
-        TextView category = holder.getItemView().findViewById(R.id.category);
         TextView deal = holder.getItemView().findViewById(R.id.deal);
         TextView expDate = holder.getItemView().findViewById(R.id.exp);
         TextView address = holder.getItemView().findViewById(R.id.address);
 
         company.setText(coupon.company);
-        category.setText(coupon.category);
         deal.setText(coupon.deal);
         expDate.setText(coupon.expDate);
         address.setText(coupon.address);
