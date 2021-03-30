@@ -15,6 +15,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 
 public class HomeActivity extends AppCompatActivity {
+    public MaterialToolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +23,7 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        MaterialToolbar toolbar = findViewById(R.id.topAppBar);
+        toolbar = findViewById(R.id.topAppBar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         toolbar.setNavigationOnClickListener(view -> {
             drawer.open();
@@ -39,6 +40,9 @@ public class HomeActivity extends AppCompatActivity {
                     break;
                 case R.id.coupons_item:
                     redirectToFragment(CouponsFragment.class);
+                    break;
+                case R.id.color_item:
+                    redirectToFragment(ChangeColorFragment.class);
                     break;
                 case R.id.sign_out_item:
                     userViewModel.signOut();
