@@ -92,6 +92,9 @@ public class ChangeColorFragment extends Fragment {
                     case "yellow":
                         newColor = Color.YELLOW;
                         break;
+                    case "green":
+                        newColor = Color.GREEN;
+                        break;
                     default:
                         newColor = Color.BLUE;
                 }
