@@ -34,10 +34,7 @@ public class CouponsFragment extends Fragment {
         couponViewModel.setUser(userViewModel.getUser());
         CouponsAdapter adapter = new CouponsAdapter(
                 couponViewModel.getCoupons(),
-                (coupon -> {
-                    //TODO implement use coupon functionality
-                    Log.d("Tag", "Coupon was used");
-                })
+                (couponViewModel::removeCoupon)
         );
 
         couponList.setAdapter(adapter);

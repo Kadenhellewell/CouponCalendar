@@ -41,9 +41,9 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.coupons_item:
                     redirectToFragment(CouponsFragment.class);
                     break;
-                case R.id.color_item:
-                    redirectToFragment(ChangeColorFragment.class);
-                    break;
+//                case R.id.color_item:
+//                    redirectToFragment(ChangeColorFragment.class);
+//                    break;
                 case R.id.sign_out_item:
                     userViewModel.signOut();
                     Intent intent = new Intent(this, SignInUpActivity.class);
