@@ -1,5 +1,6 @@
 package com.kadenhellewellcouponcalendar.phoneapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -7,7 +8,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.widget.ImageView;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,6 +19,7 @@ import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 
 public class HomeActivity extends AppCompatActivity {
     public MaterialToolbar toolbar;
+    public Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,9 +45,6 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.coupons_item:
                     redirectToFragment(CouponsFragment.class);
                     break;
-//                case R.id.color_item:
-//                    redirectToFragment(ChangeColorFragment.class);
-//                    break;
                 case R.id.sign_out_item:
                     userViewModel.signOut();
                     Intent intent = new Intent(this, SignInUpActivity.class);
@@ -65,6 +66,14 @@ public class HomeActivity extends AppCompatActivity {
                     .add(R.id.fragment_container, HomeFragment.class, null)
                     .setReorderingAllowed(true)
                     .commit();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0  && resultCode == Activity.RESULT_OK) {
+            //TODO I don't know what code should go hear.
         }
     }
 

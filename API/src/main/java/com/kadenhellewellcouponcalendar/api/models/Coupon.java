@@ -1,5 +1,7 @@
 package com.kadenhellewellcouponcalendar.api.models;
 
+import android.net.Uri;
+
 import androidx.annotation.Nullable;
 
 import com.google.firebase.database.Exclude;
@@ -10,19 +12,21 @@ public class Coupon {
     public String deal;
     public String expDate;
     public String address;
+    public Uri imageUri;
 
     @Exclude
     public String id;
 
     public Coupon() {}
 
-    public Coupon(String company, String category, String deal, String expDate, String address)
+    public Coupon(String company, String category, String deal, String expDate, String address, Uri uri)
     {
         this.company = company;
         this.category = category;
         this.deal = deal;
         this.expDate = expDate;
         this.address = address;
+        this.imageUri = uri;
     }
 
     @Override

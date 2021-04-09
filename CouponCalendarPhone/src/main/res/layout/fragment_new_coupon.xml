@@ -94,13 +94,22 @@
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/takePicture"
+            style="@style/Widget.MaterialComponents.Button.Icon"
+            android:layout_width="53dp"
+            android:layout_height="wrap_content"
+            android:translationX="16dp"
+            app:icon="@drawable/ic_baseline_camera_alt_24"
+            app:iconGravity="start" />
+
         <Button
             android:id="@+id/addCouponButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="textPostalAddress"
             android:text="Add Coupon"
             android:translationX="16dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

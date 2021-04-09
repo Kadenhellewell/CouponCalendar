@@ -24,8 +24,6 @@ public class CouponViewModel extends ViewModel {
     public CouponViewModel()
     {
         db = FirebaseDatabase.getInstance().getReference();
-//        coupons = new ObservableArrayList<Coupon>();
-//        loadCoupons();
     }
 
     public void setUser(MutableLiveData<User> user)

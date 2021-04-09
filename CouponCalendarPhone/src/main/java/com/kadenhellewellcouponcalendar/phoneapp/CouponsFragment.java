@@ -34,7 +34,7 @@ public class CouponsFragment extends Fragment {
         couponViewModel.setUser(userViewModel.getUser());
         CouponsAdapter adapter = new CouponsAdapter(
                 couponViewModel.getCoupons(),
-                (couponViewModel::removeCoupon)
+                (couponViewModel::removeCoupon) //on clicked listener
         );
 
         couponList.setAdapter(adapter);
