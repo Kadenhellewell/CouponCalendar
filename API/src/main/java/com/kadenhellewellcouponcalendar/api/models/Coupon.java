@@ -12,10 +12,12 @@ public class Coupon {
     public String deal;
     public String expDate;
     public String address;
-    public Uri imageUri;
+    public String uriString;
 
     @Exclude
     public String id;
+    @Exclude
+    public Uri imageUri;
 
     public Coupon() {}
 
@@ -27,6 +29,12 @@ public class Coupon {
         this.expDate = expDate;
         this.address = address;
         this.imageUri = uri;
+        this.uriString = "";
+        if (uri != null)
+        {
+            this.uriString = uri.toString();
+        }
+
     }
 
     @Override

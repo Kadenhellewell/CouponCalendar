@@ -1,5 +1,7 @@
 package com.kadenhellewellcouponcalendar.api;
 
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,12 +31,20 @@ public class CouponsAdapter extends CustomAdapter<Coupon>{
         TextView expDate = holder.getItemView().findViewById(R.id.exp);
         TextView address = holder.getItemView().findViewById(R.id.address);
         ImageView imageView = holder.getItemView().findViewById(R.id.image);
+        ViewGroup parent = (ViewGroup) imageView.getParent();
 
         company.setText(coupon.company);
         deal.setText(coupon.deal);
         expDate.setText(coupon.expDate);
         address.setText(coupon.address);
-        imageView.setImageURI(coupon.imageUri);
+        if(coupon.imageUri != null)
+        {
+            imageView.setImageURI(coupon.imageUri);
+        }
+        else
+        {
+            parent.removeView(imageView);
+        }
 
         Button button = holder.getItemView().findViewById(R.id.useCoupon);
         button.setOnClickListener(view -> {

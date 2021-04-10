@@ -1,5 +1,6 @@
 package com.kadenhellewellcouponcalendar.api.viewmodels;
 
+import android.net.Uri;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -53,6 +54,7 @@ public class CouponViewModel extends ViewModel {
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) { 
                 Coupon coupon = snapshot.getValue(Coupon.class);
                 coupon.id = snapshot.getKey();
+                coupon.imageUri = Uri.parse(coupon.uriString);
                 coupons.add(coupon);
             }
 
@@ -60,6 +62,7 @@ public class CouponViewModel extends ViewModel {
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 Coupon coupon = snapshot.getValue(Coupon.class);
                 coupon.id = snapshot.getKey();
+                coupon.imageUri = Uri.parse(coupon.uriString);
                 int index = coupons.indexOf(coupon);
                 coupons.set(index, coupon);
             }
@@ -68,6 +71,7 @@ public class CouponViewModel extends ViewModel {
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
                 Coupon coupon = snapshot.getValue(Coupon.class);
                 coupon.id = snapshot.getKey();
+                coupon.imageUri = Uri.parse(coupon.uriString);
                 coupons.remove(coupon);
             }
 

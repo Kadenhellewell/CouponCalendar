@@ -19,7 +19,6 @@ import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 
 public class HomeActivity extends AppCompatActivity {
     public MaterialToolbar toolbar;
-    public Uri imageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,13 +68,7 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0  && resultCode == Activity.RESULT_OK) {
-            //TODO I don't know what code should go hear.
-        }
-    }
+
 
     public void redirectToFragment(Class fragment)
     {

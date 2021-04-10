@@ -1,5 +1,6 @@
 package com.kadenhellewellcouponcalendar.phoneapp;
 
+import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -30,6 +32,8 @@ import java.util.Date;
 
 
 public class NewCouponFragment extends Fragment {
+    Uri imageUri = null;
+    HomeActivity activity = ((HomeActivity)getActivity());
 
     public NewCouponFragment() {
         super(R.layout.fragment_new_coupon);
@@ -50,12 +54,12 @@ public class NewCouponFragment extends Fragment {
             ContentValues values = new ContentValues();
             values.put(MediaStore.MediaColumns.DISPLAY_NAME, "my_image_"+timeStamp+".jpg");
             values.put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg");
-            activity.imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            imageUri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
 
 
             // tell the camera app to store the image at that file pointer
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, activity.imageUri);
+            intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
             startActivityForResult(intent, 0);
         });
 
@@ -72,7 +76,7 @@ public class NewCouponFragment extends Fragment {
                     dealEditText.getEditText().getText().toString(),
                     expEditText.getEditText().getText().toString(),
                     addressEditText.getEditText().getText().toString(),
-                    activity.imageUri //TODO get camera stuff to work here
+                    imageUri
             );
 
             couponViewModel.addCoupon(coupon);
@@ -82,5 +86,13 @@ public class NewCouponFragment extends Fragment {
                     .addToBackStack(null)
                     .commit();
          });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 0  && resultCode == Activity.RESULT_OK) {
+            //TODO not sure what should go here
+        }
     }
 }
