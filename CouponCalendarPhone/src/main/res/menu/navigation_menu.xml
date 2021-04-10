@@ -21,6 +21,11 @@
 <!--            android:icon="@drawable/ic_baseline_color_lens_24"-->
 <!--            />-->
         <item
+            android:id="@+id/map_item"
+            android:title="Map"
+            android:icon="@drawable/ic_baseline_map_24"
+            />
+        <item
             android:id="@+id/sign_out_item"
             android:title="Sign Out"
             android:icon="@drawable/ic_baseline_person_24"

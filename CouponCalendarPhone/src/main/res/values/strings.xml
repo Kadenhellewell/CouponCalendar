@@ -2,4 +2,5 @@
     <string name="app_name">CouponCalendar</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mapbox_access_token">pk.eyJ1Ijoia2FkZW5oZWxsZXdlbGwiLCJhIjoiY2tuYzZ6eWI4MW1rOTJ4bzBtMmNsaWtkMiJ9.s6VGsJyAk5LPyhtl4QIQhw</string>
 </resources>
