@@ -16,6 +16,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
+import com.mapbox.mapboxsdk.Mapbox;
 
 public class HomeActivity extends AppCompatActivity {
     public MaterialToolbar toolbar;
@@ -23,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
         setContentView(R.layout.activity_home);
 
         UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);

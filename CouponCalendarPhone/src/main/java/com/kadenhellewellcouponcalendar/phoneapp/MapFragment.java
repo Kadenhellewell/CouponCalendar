@@ -34,8 +34,8 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.OnMapReadyCallback;
 import com.mapbox.mapboxsdk.maps.Style;
 
-//import com.mapbox.mapboxsdk.plugins.markerview.MarkerView;
-//import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager;
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerView;
+import com.mapbox.mapboxsdk.plugins.markerview.MarkerViewManager;
 
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
@@ -47,14 +47,14 @@ import java.util.ArrayList;
 
 public class MapFragment extends Fragment {
     MapView mapView;
-//    MarkerView userMarker;
+    MarkerView userMarker;
     ArrayList<Point> points = new ArrayList<>(); //TODO have this be an array of coupon locations
-    HomeActivity activity = (HomeActivity)getActivity();
+    HomeActivity activity;
 
 
     public MapFragment() {
         super(R.layout.fragment_map);
-        Mapbox.getInstance(activity, getString(R.string.mapbox_access_token));
+        activity = (HomeActivity)getActivity();
     }
 
     @Override
