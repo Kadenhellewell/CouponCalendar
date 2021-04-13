@@ -61,7 +61,7 @@ import java.util.List;
 public class MapFragment extends Fragment {
     MapView mapView;
     MarkerView userMarker;
-    ArrayList<Point> couponLocs = new ArrayList<>(); //TODO have this be an array of coupon locations
+    ArrayList<Point> couponLocs = new ArrayList<>();
     HomeActivity activity;
 
     //Various mapbox things
@@ -98,6 +98,7 @@ public class MapFragment extends Fragment {
             {
                 System.out.println("Non null coordinate\n");
                 couponLocs.add(result.getCoordinate());
+                System.out.println(result.getCoordinate().toString());
             }
         }
 
@@ -133,12 +134,7 @@ public class MapFragment extends Fragment {
         final SearchOptions options = new SearchOptions.Builder()
                 .build();
 
-        System.out.println("Running for loop\n");
-        for(Coupon coupon : activity.couponViewModel.getCoupons())
-        {
-            searchRequestTask = searchEngine.search(coupon.address, options, searchCallback);
-        }
-        System.out.println(couponLocs.toString());
+
 
         mapView = view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -153,6 +149,13 @@ public class MapFragment extends Fragment {
                         if (activity.checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             activity.requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                         }
+
+                        System.out.println("Running for loop\n");
+                        for(Coupon coupon : activity.couponViewModel.getCoupons())
+                        {
+                            searchRequestTask = searchEngine.search(coupon.address, options, searchCallback);
+                        }
+                        System.out.println(couponLocs.toString());
 
                         MarkerViewManager markerViewManager = new MarkerViewManager(mapView, mapboxMap);
                         // create markerview for each coordinate in couponLocs
@@ -202,37 +205,6 @@ public class MapFragment extends Fragment {
 
                             }
                         });
-
-                        LocationComponentOptions options = locationComponent.getLocationComponentOptions().toBuilder()
-                                .trackingGesturesManagement(true)
-                                .trackingInitialMoveThreshold(500)
-                                .build();
-
-                        locationComponent.applyStyle(options);
-
-
-
-                        locationComponent.addOnCameraTrackingChangedListener(new OnCameraTrackingChangedListener() {
-                            @Override
-                            public void onCameraTrackingDismissed() {
-                                System.out.println("DONE TRACKING");
-                                new Thread(() -> {
-                                    try {
-                                        Thread.sleep(5000);
-                                    } catch (InterruptedException e) {
-                                        e.printStackTrace();
-                                    }
-                                    activity.runOnUiThread(() -> {
-                                        locationComponent.setCameraMode(CameraMode.TRACKING_GPS_NORTH);
-                                    });
-                                }).start();
-                            }
-
-                            @Override
-                            public void onCameraTrackingChanged(int currentMode) {
-                                System.out.println("TRACKING CHANGED " + currentMode);
-                            }
-                        });
                     }
                 });
             }
@@ -243,6 +215,7 @@ public class MapFragment extends Fragment {
     {
         TextView view = new TextView(activity);
         view.setText("Marker on Map");
+        view.setTextSize(24);
         return new MarkerView(new LatLng(point.latitude(), point.longitude()), view);
     }
 
