@@ -138,6 +138,7 @@ public class MapFragment extends Fragment {
         {
             searchRequestTask = searchEngine.search(coupon.address, options, searchCallback);
         }
+        System.out.println(couponLocs.toString());
 
         mapView = view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -154,6 +155,14 @@ public class MapFragment extends Fragment {
                         }
 
                         MarkerViewManager markerViewManager = new MarkerViewManager(mapView, mapboxMap);
+                        // create markerview for each coordinate in couponLocs
+
+                        markerViewManager.addMarker(createMakrerView(Point.fromLngLat(111.8338, 41.7370)));
+                        for(Point point : couponLocs)
+                        {
+                            markerViewManager.addMarker(createMakrerView(point));
+                        }
+
 
                         GeoJsonSource source = new GeoJsonSource("points",
                                 FeatureCollection.fromFeatures(new Feature[]{
@@ -171,13 +180,6 @@ public class MapFragment extends Fragment {
                                 PropertyFactory.lineColor(Color.parseColor("#e55e5e"))
                         ));
 
-                        mapboxMap.addOnMapClickListener(new MapboxMap.OnMapClickListener() {
-                            @Override
-                            public boolean onMapClick(@NonNull LatLng point) {
-
-                                return true;
-                            }
-                        });
 
                         LocationComponent locationComponent = mapboxMap.getLocationComponent();
 
@@ -235,6 +237,13 @@ public class MapFragment extends Fragment {
                 });
             }
         });
+    }
+
+    MarkerView createMakrerView(Point point)
+    {
+        TextView view = new TextView(activity);
+        view.setText("Marker on Map");
+        return new MarkerView(new LatLng(point.latitude(), point.longitude()), view);
     }
 
     @Override
