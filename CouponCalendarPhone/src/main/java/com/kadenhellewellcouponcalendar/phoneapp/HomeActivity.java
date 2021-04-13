@@ -32,6 +32,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     public MaterialToolbar toolbar;
+    CouponViewModel couponViewModel;
 
 
     @Override
@@ -44,7 +45,7 @@ public class HomeActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_home);
         UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
-        CouponViewModel couponViewModel = new ViewModelProvider(this).get(CouponViewModel.class);
+        couponViewModel = new ViewModelProvider(this).get(CouponViewModel.class);
         couponViewModel.setUser(userViewModel.getUser());
         toolbar = findViewById(R.id.topAppBar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

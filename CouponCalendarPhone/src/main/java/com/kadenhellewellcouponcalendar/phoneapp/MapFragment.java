@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import com.kadenhellewellcouponcalendar.api.models.Coupon;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.LineString;
@@ -60,7 +61,7 @@ import java.util.List;
 public class MapFragment extends Fragment {
     MapView mapView;
     MarkerView userMarker;
-    ArrayList<Point> points = new ArrayList<>(); //TODO have this be an array of coupon locations
+    ArrayList<Point> couponLocs = new ArrayList<>(); //TODO have this be an array of coupon locations
     HomeActivity activity;
 
     //Various mapbox things
@@ -89,6 +90,15 @@ public class MapFragment extends Fragment {
                 @NonNull ResponseInfo responseInfo
         ) {
             Log.i("SearchApiExample", "Search result: " + result);
+            // result.getCoordinate();
+            // result.getEtaMinutes();
+            // TODO check time or distance when we get to that
+            System.out.println("Inside on Result\n");
+            if (result.getCoordinate() != null)
+            {
+                System.out.println("Non null coordinate\n");
+                couponLocs.add(result.getCoordinate());
+            }
         }
 
         @Override
@@ -119,11 +129,15 @@ public class MapFragment extends Fragment {
         activity = (HomeActivity)getActivity();
         searchEngine = MapboxSearchSdk.createSearchEngine();
 
+
         final SearchOptions options = new SearchOptions.Builder()
-                .limit(5)
                 .build();
 
-        searchRequestTask = searchEngine.search("Paris Eiffel Tower", options, searchCallback);
+        System.out.println("Running for loop\n");
+        for(Coupon coupon : activity.couponViewModel.getCoupons())
+        {
+            searchRequestTask = searchEngine.search(coupon.address, options, searchCallback);
+        }
 
         mapView = view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -143,11 +157,9 @@ public class MapFragment extends Fragment {
 
                         GeoJsonSource source = new GeoJsonSource("points",
                                 FeatureCollection.fromFeatures(new Feature[]{
-                                        Feature.fromGeometry(LineString.fromLngLats(points))
+                                        Feature.fromGeometry(LineString.fromLngLats(couponLocs))
                                 })
                         );
-
-                        searchRequestTask = searchEngine.search("Paris Eiffel Tower", options, searchCallback);
 
                         style.addSource(source);
 

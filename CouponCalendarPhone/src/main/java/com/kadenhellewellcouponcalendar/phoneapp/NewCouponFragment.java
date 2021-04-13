@@ -1,9 +1,11 @@
 package com.kadenhellewellcouponcalendar.phoneapp;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -49,6 +51,9 @@ public class NewCouponFragment extends Fragment {
         Button addCoupon = view.findViewById(R.id.addCouponButton);
         MaterialButton takePicture = view.findViewById(R.id.takePicture);
         takePicture.setOnClickListener(v -> {
+            if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                activity.requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
             ContentResolver resolver = activity.getContentResolver();
             String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
             ContentValues values = new ContentValues();

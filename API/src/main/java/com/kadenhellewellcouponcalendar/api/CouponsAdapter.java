@@ -37,7 +37,7 @@ public class CouponsAdapter extends CustomAdapter<Coupon>{
         deal.setText(coupon.deal);
         expDate.setText(coupon.expDate);
         address.setText(coupon.address);
-        if(coupon.imageUri != null)
+        if(coupon.imageUri != null) // TODO figure out how to not break when no picture taken
         {
             imageView.setImageURI(coupon.imageUri);
         }
