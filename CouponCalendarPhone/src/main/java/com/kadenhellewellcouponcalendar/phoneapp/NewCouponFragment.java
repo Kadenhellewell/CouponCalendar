@@ -74,13 +74,21 @@ public class NewCouponFragment extends Fragment {
             TextInputLayout categoryEditText = view.findViewById(R.id.category);
             TextInputLayout dealEditText = view.findViewById(R.id.deal);
             TextInputLayout expEditText = view.findViewById(R.id.expDate);
-            TextInputLayout addressEditText = view.findViewById(R.id.address);
+            TextInputLayout streetEditText = view.findViewById(R.id.street);
+            TextInputLayout cityEditText = view.findViewById(R.id.city);
+            TextInputLayout stateEditText = view.findViewById(R.id.state);
+            TextInputLayout zipEditText = view.findViewById(R.id.zip);
+            String address = streetEditText.getEditText().getText().toString() + " " +
+                             cityEditText.getEditText().getText().toString() + " " +
+                             stateEditText.getEditText().getText().toString() + " " +
+                             zipEditText.getEditText().getText().toString();
+
             Coupon coupon = new Coupon(
                     companyEditText.getEditText().getText().toString(),
                     categoryEditText.getEditText().getText().toString(),
                     dealEditText.getEditText().getText().toString(),
                     expEditText.getEditText().getText().toString(),
-                    addressEditText.getEditText().getText().toString(),
+                    address,
                     imageUri
             );
 
