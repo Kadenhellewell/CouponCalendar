@@ -61,6 +61,7 @@ import java.util.List;
 public class MapFragment extends Fragment {
     MapView mapView;
     MarkerView userMarker;
+    //TODO make observable array list
     ArrayList<Point> couponLocs = new ArrayList<>();
     HomeActivity activity;
 
@@ -160,6 +161,7 @@ public class MapFragment extends Fragment {
                         MarkerViewManager markerViewManager = new MarkerViewManager(mapView, mapboxMap);
                         // create markerview for each coordinate in couponLocs
 
+                        //TODO put inside obersbale array list listener
                         markerViewManager.addMarker(createMakrerView(Point.fromLngLat(111.8338, 41.7370)));
                         for(Point point : couponLocs)
                         {

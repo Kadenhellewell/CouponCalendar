@@ -31,19 +31,19 @@ public class CouponsAdapter extends CustomAdapter<Coupon>{
         TextView expDate = holder.getItemView().findViewById(R.id.exp);
         TextView address = holder.getItemView().findViewById(R.id.address);
         ImageView imageView = holder.getItemView().findViewById(R.id.image);
-        ViewGroup parent = (ViewGroup) imageView.getParent();
 
         company.setText(coupon.company);
         deal.setText(coupon.deal);
-        expDate.setText(coupon.expDate);
+        expDate.setText(Long.toString(coupon.expDateLong));
         address.setText(coupon.address);
-        if(coupon.imageUri != null) // TODO figure out how to not break when no picture taken
+        if(!coupon.uriString.equals("")) // TODO figure out how to not break when no picture taken
         {
+            imageView.setVisibility(View.VISIBLE);
             imageView.setImageURI(coupon.imageUri);
         }
         else
         {
-            parent.removeView(imageView);
+            imageView.setVisibility(View.GONE);
         }
 
         Button button = holder.getItemView().findViewById(R.id.useCoupon);

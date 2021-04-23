@@ -69,19 +69,14 @@
                     android:inputType="textMultiLine" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/expDate"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
+                style="@style/Widget.MaterialComponents.Button.Icon"
+                android:layout_width="53dp"
                 android:layout_height="wrap_content"
-                android:hint="Expiration Date"
-                android:paddingHorizontal="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="date" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:translationX="16dp"
+                app:icon="@drawable/ic_baseline_calendar_today_24"
+                app:iconGravity="start" />
 
             <TextView
                 android:layout_width="match_parent"

@@ -23,6 +23,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kadenhellewellcouponcalendar.api.models.Coupon;
@@ -35,7 +37,8 @@ import java.util.Date;
 
 public class NewCouponFragment extends Fragment {
     Uri imageUri = null;
-    HomeActivity activity = ((HomeActivity)getActivity());
+    long expDate = 0;
+
 
     public NewCouponFragment() {
         super(R.layout.fragment_new_coupon);
@@ -45,11 +48,28 @@ public class NewCouponFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         HomeActivity activity = ((HomeActivity)getActivity());
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().build();
+        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                expDate = ((Long) selection);
+                System.out.println(expDate);
+            }
+        });
+
         UserViewModel userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
         CouponViewModel couponViewModel = new ViewModelProvider(getActivity()).get(CouponViewModel.class);
         couponViewModel.setUser(userViewModel.getUser());
         Button addCoupon = view.findViewById(R.id.addCouponButton);
         MaterialButton takePicture = view.findViewById(R.id.takePicture);
+        MaterialButton expDateButton = view.findViewById(R.id.expDate);
+
+
+        expDateButton.setOnClickListener(v -> {
+            datePicker.show(activity.getSupportFragmentManager(), "date picker");
+        });
+
+        //Take picture
         takePicture.setOnClickListener(v -> {
             if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 activity.requestPermissions(new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
@@ -73,7 +93,6 @@ public class NewCouponFragment extends Fragment {
             TextInputLayout companyEditText = view.findViewById(R.id.companyName);
             TextInputLayout categoryEditText = view.findViewById(R.id.category);
             TextInputLayout dealEditText = view.findViewById(R.id.deal);
-            TextInputLayout expEditText = view.findViewById(R.id.expDate);
             TextInputLayout streetEditText = view.findViewById(R.id.street);
             TextInputLayout cityEditText = view.findViewById(R.id.city);
             TextInputLayout stateEditText = view.findViewById(R.id.state);
@@ -87,7 +106,7 @@ public class NewCouponFragment extends Fragment {
                     companyEditText.getEditText().getText().toString(),
                     categoryEditText.getEditText().getText().toString(),
                     dealEditText.getEditText().getText().toString(),
-                    expEditText.getEditText().getText().toString(),
+                    expDate,
                     address,
                     imageUri
             );
