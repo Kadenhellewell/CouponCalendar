@@ -34,7 +34,7 @@ public class CouponsAdapter extends CustomAdapter<Coupon>{
 
         company.setText(coupon.company);
         deal.setText(coupon.deal);
-        expDate.setText(Long.toString(coupon.expDateLong));
+        expDate.setText(coupon.expDateString);
         address.setText(coupon.address);
         if(!coupon.uriString.equals("")) // TODO figure out how to not break when no picture taken
         {

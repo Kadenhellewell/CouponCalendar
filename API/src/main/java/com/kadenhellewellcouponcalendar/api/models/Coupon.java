@@ -8,13 +8,14 @@ import com.google.firebase.database.Exclude;
 
 import java.text.SimpleDateFormat;
 import java.time.*;
+import java.time.format.DateTimeFormatter;
 
 
 public class Coupon {
     public String company;
     public String category;
     public String deal;
-    public long expDateLong;
+    public String expDateString;
     public String address;
     public String uriString;
 
@@ -33,9 +34,10 @@ public class Coupon {
         this.company = company;
         this.category = category;
         this.deal = deal;
-        this.expDateLong = expDateLong;
         Instant instant = Instant.ofEpochMilli(expDateLong); // expDateLong is in milliseconds
-        //this.expDate = ZonedDateTime.ofInstant(instant, ); //TODO convert instant to LocalDate
+        LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+        this.expDateString = DateTimeFormatter.ofPattern("MM-dd-yyyy").format(dateTime);
+        this.expDate = dateTime.toLocalDate();
         this.address = address;
         this.imageUri = uri;
         this.uriString = "";
