@@ -3,6 +3,8 @@ package com.kadenhellewellcouponcalendar.phoneapp;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
 import androidx.fragment.app.Fragment;
 
 import android.Manifest;
@@ -62,7 +64,7 @@ public class MapFragment extends Fragment {
     MapView mapView;
     MarkerView userMarker;
     //TODO make observable array list
-    ArrayList<Point> couponLocs = new ArrayList<>();
+    ObservableArrayList<Point> couponLocs = new ObservableArrayList<>();
     HomeActivity activity;
 
     //Various mapbox things
@@ -94,7 +96,6 @@ public class MapFragment extends Fragment {
             // result.getCoordinate();
             // result.getEtaMinutes();
             // TODO check time or distance when we get to that
-            System.out.println("Inside on Result\n");
             if (result.getCoordinate() != null)
             {
                 System.out.println("Non null coordinate\n");
@@ -151,22 +152,43 @@ public class MapFragment extends Fragment {
                             activity.requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                         }
 
-                        System.out.println("Running for loop\n");
                         for(Coupon coupon : activity.couponViewModel.getCoupons())
                         {
                             searchRequestTask = searchEngine.search(coupon.address, options, searchCallback);
                         }
-                        System.out.println(couponLocs.toString());
 
                         MarkerViewManager markerViewManager = new MarkerViewManager(mapView, mapboxMap);
                         // create markerview for each coordinate in couponLocs
+                        couponLocs.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<Point>>() {
+                            @Override
+                            public void onChanged(ObservableList<Point> sender) {
+                                for(Point point : sender)
+                                {
+                                    markerViewManager.addMarker(createMakrerView(point));
+                                    System.out.println(couponLocs);
+                                }
+                            }
 
-                        //TODO put inside obersbale array list listener
-                        markerViewManager.addMarker(createMakrerView(Point.fromLngLat(111.8338, 41.7370)));
-                        for(Point point : couponLocs)
-                        {
-                            markerViewManager.addMarker(createMakrerView(point));
-                        }
+                            @Override
+                            public void onItemRangeChanged(ObservableList<Point> sender, int positionStart, int itemCount) {
+
+                            }
+
+                            @Override
+                            public void onItemRangeInserted(ObservableList<Point> sender, int positionStart, int itemCount) {
+
+                            }
+
+                            @Override
+                            public void onItemRangeMoved(ObservableList<Point> sender, int fromPosition, int toPosition, int itemCount) {
+
+                            }
+
+                            @Override
+                            public void onItemRangeRemoved(ObservableList<Point> sender, int positionStart, int itemCount) {
+
+                            }
+                        });
 
 
                         GeoJsonSource source = new GeoJsonSource("points",

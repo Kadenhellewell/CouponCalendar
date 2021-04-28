@@ -96,7 +96,7 @@ public class CouponViewModel extends ViewModel {
     // Call this when a coupon gets used or expires.
     public void removeCoupon(Coupon usedCoupon)
     {
-        //TODO learn correct syntax for this.
+        if (user.getValue() == null) return;
         db.child("userData").child(user.getValue().uid).child("coupons").child(usedCoupon.id).removeValue();
     }
 }

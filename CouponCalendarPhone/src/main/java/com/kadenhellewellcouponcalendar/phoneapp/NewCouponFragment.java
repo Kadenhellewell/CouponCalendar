@@ -91,7 +91,7 @@ public class NewCouponFragment extends Fragment {
         //Add new coupon
         addCoupon.setOnClickListener(v -> {
             TextInputLayout companyEditText = view.findViewById(R.id.companyName);
-            TextInputLayout categoryEditText = view.findViewById(R.id.category);
+            //TODO figure out the exposed drop down menu stuff
             TextInputLayout dealEditText = view.findViewById(R.id.deal);
             TextInputLayout streetEditText = view.findViewById(R.id.street);
             TextInputLayout cityEditText = view.findViewById(R.id.city);
@@ -104,7 +104,7 @@ public class NewCouponFragment extends Fragment {
 
             Coupon coupon = new Coupon(
                     companyEditText.getEditText().getText().toString(),
-                    categoryEditText.getEditText().getText().toString(),
+                    "Place Holder",
                     dealEditText.getEditText().getText().toString(),
                     expDate,
                     address,
