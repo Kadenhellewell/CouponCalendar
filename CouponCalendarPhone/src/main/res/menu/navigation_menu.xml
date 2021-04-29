@@ -15,11 +15,12 @@
             android:title="Coupons"
             android:icon="@drawable/ic_baseline_more_24"
             />
-<!--        <item-->
-<!--            android:id="@+id/color_item"-->
-<!--            android:title="Change Color"-->
-<!--            android:icon="@drawable/ic_baseline_color_lens_24"-->
-<!--            />-->
+        <item
+            android:id="@+id/giftcards_item"
+            android:title="Gift Cards"
+            android:icon="@drawable/ic_baseline_card_giftcard_24"
+            />
+
         <item
             android:id="@+id/map_item"
             android:title="Map"

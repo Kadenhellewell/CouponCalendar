@@ -18,6 +18,7 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.kadenhellewellcouponcalendar.api.viewmodels.CouponViewModel;
+import com.kadenhellewellcouponcalendar.api.viewmodels.GiftCardViewModel;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.search.MapboxSearchSdk;
@@ -32,8 +33,9 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
     public MaterialToolbar toolbar;
-    CouponViewModel couponViewModel;
-
+    public CouponViewModel couponViewModel;
+    public GiftCardViewModel giftCardViewModel;
+    public UserViewModel userViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +44,17 @@ public class HomeActivity extends AppCompatActivity {
         //Set up various mapbox things
         Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
 
-
         setContentView(R.layout.activity_home);
-        UserViewModel userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
+
+        //View models
+        userViewModel = new ViewModelProvider(this).get(UserViewModel.class);
         couponViewModel = new ViewModelProvider(this).get(CouponViewModel.class);
         couponViewModel.setUser(userViewModel.getUser());
+        giftCardViewModel = new ViewModelProvider(this).get(GiftCardViewModel.class);
+        giftCardViewModel.setUser(userViewModel.getUser());
+        //View Models
+
+        //Navigation drawer thing
         toolbar = findViewById(R.id.topAppBar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         toolbar.setNavigationOnClickListener(view -> {
@@ -65,6 +73,9 @@ public class HomeActivity extends AppCompatActivity {
                 case R.id.coupons_item:
                     redirectToFragment(CouponsFragment.class);
                     break;
+                case R.id.giftcards_item:
+                    redirectToFragment(GiftCardsFragment.class);
+                    break;
                 case R.id.map_item:
                     redirectToFragment(MapFragment.class);
                     break;
@@ -78,11 +89,14 @@ public class HomeActivity extends AppCompatActivity {
             drawer.close();
             return true;
         });
+        //Navigation drawer thing
 
+        //Floating action button
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             redirectToFragment(NewCouponFragment.class);
         });
+        //Floating action button
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()

@@ -28,13 +28,13 @@ public class CouponsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        UserViewModel userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
+        HomeActivity activity = (HomeActivity) getActivity();
+
         RecyclerView couponList = view.findViewById(R.id.couponList);
-        CouponViewModel couponViewModel = new ViewModelProvider(getActivity()).get(CouponViewModel.class);
-        couponViewModel.setUser(userViewModel.getUser());
+        activity.couponViewModel.setUser(activity.userViewModel.getUser());
         CouponsAdapter adapter = new CouponsAdapter(
-                couponViewModel.getCoupons(),
-                (couponViewModel::removeCoupon) //on clicked listener
+                activity.couponViewModel.getCoupons(),
+                (activity.couponViewModel::removeCoupon) //on clicked listener
         );
 
         couponList.setAdapter(adapter);
