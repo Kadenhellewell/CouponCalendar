@@ -49,17 +49,11 @@ public class NewCouponFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         HomeActivity activity = ((HomeActivity)getActivity());
         MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().build();
-        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
-            @Override
-            public void onPositiveButtonClick(Object selection) {
-                expDate = ((Long) selection);
-                System.out.println(expDate);
-            }
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            expDate = ((Long) selection);
         });
 
-        UserViewModel userViewModel = new ViewModelProvider(getActivity()).get(UserViewModel.class);
-        CouponViewModel couponViewModel = new ViewModelProvider(getActivity()).get(CouponViewModel.class);
-        couponViewModel.setUser(userViewModel.getUser());
+        activity.couponViewModel.setUser(activity.userViewModel.getUser());
         Button addCoupon = view.findViewById(R.id.addCouponButton);
         MaterialButton takePicture = view.findViewById(R.id.takePicture);
         MaterialButton expDateButton = view.findViewById(R.id.expDate);
