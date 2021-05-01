@@ -18,6 +18,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -32,6 +34,10 @@ import com.kadenhellewellcouponcalendar.api.viewmodels.CouponViewModel;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 
 import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 
@@ -48,15 +54,26 @@ public class NewCouponFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         HomeActivity activity = ((HomeActivity)getActivity());
-        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().build();
-        datePicker.addOnPositiveButtonClickListener(selection -> {
-            expDate = ((Long) selection);
-        });
 
-        activity.couponViewModel.setUser(activity.userViewModel.getUser());
+        //Set up drop down menu
+        String[] categoryOptions = {"Food", "Shopping", "Miscellaneous"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.category_menu, categoryOptions);
+        TextInputLayout category = view.findViewById(R.id.categoryOptions);
+        ((AutoCompleteTextView) category.getEditText()).setAdapter(adapter);
+        //Set up drop down menu
         Button addCoupon = view.findViewById(R.id.addCouponButton);
         MaterialButton takePicture = view.findViewById(R.id.takePicture);
         MaterialButton expDateButton = view.findViewById(R.id.expDate);
+
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().build();
+        datePicker.addOnPositiveButtonClickListener(selection -> {
+            expDate = ((Long) selection);
+            Instant instant = Instant.ofEpochMilli(expDate); // expDateLong is in milliseconds
+            LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
+            expDateButton.setText(DateTimeFormatter.ofPattern("MM-dd-yyyy").format(dateTime));
+        });
+
+        activity.couponViewModel.setUser(activity.userViewModel.getUser());
 
 
         expDateButton.setOnClickListener(v -> {
@@ -98,14 +115,14 @@ public class NewCouponFragment extends Fragment {
 
             Coupon coupon = new Coupon(
                     companyEditText.getEditText().getText().toString(),
-                    "Place Holder",
+                    category.getEditText().getText().toString(),
                     dealEditText.getEditText().getText().toString(),
                     expDate,
                     address,
                     imageUri
             );
 
-            couponViewModel.addCoupon(coupon);
+            activity.couponViewModel.addCoupon(coupon);
             getActivity().getSupportFragmentManager().beginTransaction()
                     .replace(R.id.fragment_container, CouponsFragment.class, null)
                     .setReorderingAllowed(true)
