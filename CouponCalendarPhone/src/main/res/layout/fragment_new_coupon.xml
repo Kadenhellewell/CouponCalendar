@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center_horizontal"
     android:autofillHints="Company"
     tools:context=".NewCouponFragment">
 
@@ -19,7 +20,19 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/switchMat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp"
+                android:gravity="center_horizontal"
+                app:thumbTint="@color/purple_700"
+                app:trackTint="@color/purple_500" />
+
             <TextView
+                android:id="@+id/newSomething"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:gravity="center"
@@ -60,9 +73,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="Category"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="8dp"
-                android:hint="Category"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -83,65 +96,6 @@
                 android:translationX="16dp"
                 app:icon="@drawable/ic_baseline_calendar_today_24"
                 app:iconGravity="start" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:gravity="center"
-                android:text="Address"
-                android:textSize="20sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/street"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Street"
-                android:paddingHorizontal="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/city"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="City"
-                android:paddingHorizontal="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/state"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="State"
-                android:paddingHorizontal="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/zip"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Zip Code"
-                android:paddingHorizontal="16dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/takePicture"

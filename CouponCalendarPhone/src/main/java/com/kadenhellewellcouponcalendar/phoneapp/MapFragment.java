@@ -154,7 +154,7 @@ public class MapFragment extends Fragment {
 
                         for(Coupon coupon : activity.couponViewModel.getCoupons())
                         {
-                            searchRequestTask = searchEngine.search(coupon.address, options, searchCallback);
+                            searchRequestTask = searchEngine.search(coupon.company, options, searchCallback);
                         }
 
                         MarkerViewManager markerViewManager = new MarkerViewManager(mapView, mapboxMap);

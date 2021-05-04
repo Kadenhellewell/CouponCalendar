@@ -17,7 +17,6 @@ public class GiftCard {
     public String category;
     public double amount;
     public String expDateString;
-    public String address;
 
     @Exclude
     public String id;
@@ -27,7 +26,7 @@ public class GiftCard {
 
     public GiftCard() {}
 
-    public GiftCard(String company, String category, double amount, long expDateLong, String address, Uri uri)
+    public GiftCard(String company, String category, double amount, long expDateLong)
     {
         this.company = company;
         this.category = category;
@@ -36,7 +35,6 @@ public class GiftCard {
         LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
         this.expDateString = DateTimeFormatter.ofPattern("MM-dd-yyyy").format(dateTime);
         this.expDate = dateTime.toLocalDate();
-        this.address = address;
     }
 
     @Override

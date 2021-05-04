@@ -85,16 +85,16 @@ public class GiftCardViewModel extends ViewModel {
         });
     }
 
-    public void addCoupon(Coupon newCoupon)
+    public void addGiftCard(GiftCard newGiftCard)
     {
         if (user.getValue() == null) return;
-        db.child("userData").child(user.getValue().uid).child("giftcards").push().setValue(newCoupon);
+        db.child("userData").child(user.getValue().uid).child("giftcards").push().setValue(newGiftCard);
     }
 
     // Call this when a coupon gets used or expires.
-    public void removeCoupon(Coupon usedCoupon)
+    public void removeGiftCard(GiftCard usedGiftCard)
     {
         if (user.getValue() == null) return;
-        db.child("userData").child(user.getValue().uid).child("giftcards").child(usedCoupon.id).removeValue();
+        db.child("userData").child(user.getValue().uid).child("giftcards").child(usedGiftCard.id).removeValue();
     }
 }

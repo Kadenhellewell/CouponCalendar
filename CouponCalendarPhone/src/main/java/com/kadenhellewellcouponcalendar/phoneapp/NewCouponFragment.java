@@ -23,13 +23,16 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputLayout;
 import com.kadenhellewellcouponcalendar.api.models.Coupon;
+import com.kadenhellewellcouponcalendar.api.models.GiftCard;
 import com.kadenhellewellcouponcalendar.api.viewmodels.CouponViewModel;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
 
@@ -44,6 +47,7 @@ import java.util.Date;
 public class NewCouponFragment extends Fragment {
     Uri imageUri = null;
     long expDate = 0;
+    String state = "New Coupon";
 
 
     public NewCouponFragment() {
@@ -55,15 +59,45 @@ public class NewCouponFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         HomeActivity activity = ((HomeActivity)getActivity());
 
+
         //Set up drop down menu
         String[] categoryOptions = {"Food", "Shopping", "Miscellaneous"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.category_menu, categoryOptions);
         TextInputLayout category = view.findViewById(R.id.categoryOptions);
         ((AutoCompleteTextView) category.getEditText()).setAdapter(adapter);
         //Set up drop down menu
+
+        //Buttons
         Button addCoupon = view.findViewById(R.id.addCouponButton);
         MaterialButton takePicture = view.findViewById(R.id.takePicture);
         MaterialButton expDateButton = view.findViewById(R.id.expDate);
+        //Buttons
+
+        //Other Views
+        TextView newSomething = view.findViewById(R.id.newSomething);
+        TextInputLayout dealEditText = view.findViewById(R.id.deal);
+        //Other Views
+
+        //Add switch capabilities
+        SwitchMaterial switchMaterial = view.findViewById(R.id.switchMat);
+        switchMaterial.setOnCheckedChangeListener(((buttonView, isChecked) -> {
+            if (state.equals("New Coupon"))
+            {
+                state = "New Gift Card";
+                dealEditText.setHint("Amount");
+                addCoupon.setText("Add Gift Card");
+                takePicture.setVisibility(View.GONE);
+            }
+            else
+            {
+                state = "New Coupon";
+                dealEditText.setHint("Deal");
+                addCoupon.setText("Add Coupon");
+                takePicture.setVisibility(View.VISIBLE);
+            }
+            newSomething.setText(state);
+        }));
+        //Add switch capabilities
 
         MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker().build();
         datePicker.addOnPositiveButtonClickListener(selection -> {
@@ -102,32 +136,32 @@ public class NewCouponFragment extends Fragment {
         //Add new coupon
         addCoupon.setOnClickListener(v -> {
             TextInputLayout companyEditText = view.findViewById(R.id.companyName);
-            //TODO figure out the exposed drop down menu stuff
-            TextInputLayout dealEditText = view.findViewById(R.id.deal);
-            TextInputLayout streetEditText = view.findViewById(R.id.street);
-            TextInputLayout cityEditText = view.findViewById(R.id.city);
-            TextInputLayout stateEditText = view.findViewById(R.id.state);
-            TextInputLayout zipEditText = view.findViewById(R.id.zip);
-            String address = streetEditText.getEditText().getText().toString() + " " +
-                             cityEditText.getEditText().getText().toString() + " " +
-                             stateEditText.getEditText().getText().toString() + " " +
-                             zipEditText.getEditText().getText().toString();
 
-            Coupon coupon = new Coupon(
-                    companyEditText.getEditText().getText().toString(),
-                    category.getEditText().getText().toString(),
-                    dealEditText.getEditText().getText().toString(),
-                    expDate,
-                    address,
-                    imageUri
-            );
+            if (state.equals("New Coupon"))
+            {
+                Coupon coupon = new Coupon(
+                        companyEditText.getEditText().getText().toString(),
+                        category.getEditText().getText().toString(),
+                        dealEditText.getEditText().getText().toString(),
+                        expDate,
+                        imageUri
+                );
 
-            activity.couponViewModel.addCoupon(coupon);
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.fragment_container, CouponsFragment.class, null)
-                    .setReorderingAllowed(true)
-                    .addToBackStack(null)
-                    .commit();
+                activity.couponViewModel.addCoupon(coupon);
+                activity.redirectToFragment(CouponsFragment.class);
+            }
+            else
+            {
+                GiftCard giftCard = new GiftCard(
+                        companyEditText.getEditText().getText().toString(),
+                        category.getEditText().getText().toString(),
+                        Double.parseDouble(dealEditText.getEditText().getText().toString()),
+                        expDate
+                );
+
+                activity.giftCardViewModel.addGiftCard(giftCard);
+                activity.redirectToFragment(GiftCardsFragment.class);
+            }
          });
     }
 
@@ -138,4 +172,6 @@ public class NewCouponFragment extends Fragment {
             //TODO not sure what should go here
         }
     }
+
+
 }

@@ -16,7 +16,6 @@ public class Coupon {
     public String category;
     public String deal;
     public String expDateString;
-    public String address;
     public String uriString;
 
     @Exclude
@@ -29,7 +28,7 @@ public class Coupon {
 
     public Coupon() {}
 
-    public Coupon(String company, String category, String deal, long expDateLong, String address, Uri uri)
+    public Coupon(String company, String category, String deal, long expDateLong, Uri uri)
     {
         this.company = company;
         this.category = category;
@@ -38,7 +37,6 @@ public class Coupon {
         LocalDateTime dateTime = LocalDateTime.ofInstant(instant, ZoneOffset.UTC);
         this.expDateString = DateTimeFormatter.ofPattern("MM-dd-yyyy").format(dateTime);
         this.expDate = dateTime.toLocalDate();
-        this.address = address;
         this.imageUri = uri;
         this.uriString = "";
         if (uri != null)
