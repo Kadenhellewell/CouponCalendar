@@ -6,6 +6,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.databinding.ObservableArrayList;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.kadenhellewellcouponcalendar.api.models.Coupon;
 import com.kadenhellewellcouponcalendar.api.models.GiftCard;
 
@@ -31,8 +32,8 @@ public class GiftCardsAdapter extends CustomAdapter<GiftCard> {
         TextView company = holder.getItemView().findViewById(R.id.company);
         company.setText(giftCard.company);
 
-        TextView amount = holder.getItemView().findViewById(R.id.amount);
-        amount.setText(Double.toString(giftCard.amount));
+        TextInputLayout amount = holder.getItemView().findViewById(R.id.amount);
+        amount.getEditText().setText(Double.toString(giftCard.amount));
 
         TextView exp = holder.getItemView().findViewById(R.id.exp);
         exp.setText(giftCard.expDateString);
@@ -44,6 +45,7 @@ public class GiftCardsAdapter extends CustomAdapter<GiftCard> {
 
         Button updateGiftcard = holder.getItemView().findViewById(R.id.updateGiftcard);
         updateGiftcard.setOnClickListener(e -> {
+            giftCard.amount = Double.parseDouble(amount.getEditText().getText().toString());
             listener.updateOnClick(giftCard);
         });
     }

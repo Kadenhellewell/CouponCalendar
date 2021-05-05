@@ -49,6 +49,4 @@ public class GiftCardsFragment extends Fragment {
         giftcardList.setAdapter(adapter);
         giftcardList.setLayoutManager(new LinearLayoutManager(getActivity()));
     }
-
-
 }

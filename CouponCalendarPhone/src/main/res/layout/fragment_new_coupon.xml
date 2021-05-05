@@ -20,6 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <!-- android:textColor="?android:attr/textColorSecondary" -->
             <com.google.android.material.switchmaterial.SwitchMaterial
                 android:id="@+id/switchMat"
                 android:layout_width="match_parent"
