@@ -29,7 +29,6 @@ public class CouponsAdapter extends CustomAdapter<Coupon>{
         TextView company = holder.getItemView().findViewById(R.id.company);
         TextView deal = holder.getItemView().findViewById(R.id.deal);
         TextView expDate = holder.getItemView().findViewById(R.id.exp);
-        TextView address = holder.getItemView().findViewById(R.id.address);
         ImageView imageView = holder.getItemView().findViewById(R.id.image);
 
         company.setText(coupon.company);

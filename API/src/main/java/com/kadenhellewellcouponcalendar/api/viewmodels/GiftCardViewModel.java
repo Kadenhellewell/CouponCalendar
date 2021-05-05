@@ -91,6 +91,12 @@ public class GiftCardViewModel extends ViewModel {
         db.child("userData").child(user.getValue().uid).child("giftcards").push().setValue(newGiftCard);
     }
 
+    public void updateGiftCard(GiftCard giftCard)
+    {
+        if (user.getValue() == null) return;
+        db.child("userData").child(user.getValue().uid).child("giftcards").child(giftCard.id).setValue(giftCard);
+    }
+
     // Call this when a coupon gets used or expires.
     public void removeGiftCard(GiftCard usedGiftCard)
     {

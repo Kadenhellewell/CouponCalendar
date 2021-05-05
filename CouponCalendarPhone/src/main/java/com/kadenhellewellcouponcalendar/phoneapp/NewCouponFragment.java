@@ -108,6 +108,7 @@ public class NewCouponFragment extends Fragment {
         });
 
         activity.couponViewModel.setUser(activity.userViewModel.getUser());
+        activity.giftCardViewModel.setUser(activity.userViewModel.getUser());
 
 
         expDateButton.setOnClickListener(v -> {
