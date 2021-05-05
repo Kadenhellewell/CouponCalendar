@@ -7,14 +7,24 @@
     tools:context=".CouponsFragment"
     tools:layout_gravity="center">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/category_text_view_giftCard"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:padding="16dp"
+        android:text="Categories"
+        android:textAppearance="?attr/textAppearanceSubtitle1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/giftcard_List"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/category_text_view_giftCard" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

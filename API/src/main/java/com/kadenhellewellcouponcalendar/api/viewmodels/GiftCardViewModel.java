@@ -19,13 +19,17 @@ import com.kadenhellewellcouponcalendar.api.models.GiftCard;
 import com.kadenhellewellcouponcalendar.api.models.User;
 
 public class GiftCardViewModel extends ViewModel {
-    private ObservableArrayList<GiftCard> giftcards;
+    private ObservableArrayList<GiftCard> giftcards = new ObservableArrayList<>();
+    private ObservableArrayList<GiftCard> filteredGiftcards = new ObservableArrayList<>();
+    public MutableLiveData<String> currentCategroy = new MutableLiveData<>();
+    public static final String[] categoryOptions = {"Food", "Shopping", "Miscellaneous"};
     private DatabaseReference db;
     MutableLiveData<User> user;
 
     public GiftCardViewModel()
     {
         db = FirebaseDatabase.getInstance().getReference();
+        currentCategroy.setValue("All");
     }
 
     public void setUser(MutableLiveData<User> user)
@@ -35,12 +39,36 @@ public class GiftCardViewModel extends ViewModel {
 
     public ObservableArrayList<GiftCard> getGiftcards()
     {
-        if (giftcards == null)
+        if (giftcards.size() == 0)
         {
-            giftcards = new ObservableArrayList<GiftCard>();
             loadGiftCards();
         }
         return giftcards;
+    }
+
+    public ObservableArrayList<GiftCard> getFilteredGiftcards()
+    {
+        if (giftcards.size() == 0)
+        {
+            loadGiftCards();
+        }
+        return filteredGiftcards;
+    }
+
+    public ObservableArrayList<GiftCard> setGiftcardFilter(String filter)
+    {
+        if(!currentCategroy.getValue().equals(filter))
+        {
+            filteredGiftcards.clear();
+            for (GiftCard giftCard : giftcards)
+            {
+                if (giftCard.category.equals(filter))
+                {
+                    filteredGiftcards.add(giftCard);
+                }
+            }
+        }
+        return filteredGiftcards;
     }
 
     private void loadGiftCards()
@@ -56,6 +84,10 @@ public class GiftCardViewModel extends ViewModel {
                 GiftCard giftcard = snapshot.getValue(GiftCard.class);
                 giftcard.id = snapshot.getKey();
                 giftcards.add(giftcard);
+                if (currentCategroy.getValue().equals("All") || currentCategroy.getValue().equals(giftcard.category))
+                {
+                    filteredGiftcards.add(giftcard);
+                }
             }
 
             @Override
@@ -64,6 +96,11 @@ public class GiftCardViewModel extends ViewModel {
                 giftcard.id = snapshot.getKey();
                 int index = giftcards.indexOf(giftcard);
                 giftcards.set(index, giftcard);
+                if (currentCategroy.getValue().equals("All") || currentCategroy.getValue().equals(giftcard.category))
+                {
+                    int index2 = filteredGiftcards.indexOf(giftcard);
+                    filteredGiftcards.set(index2, giftcard);
+                }
             }
 
             @Override
@@ -71,6 +108,10 @@ public class GiftCardViewModel extends ViewModel {
                 GiftCard giftcard = snapshot.getValue(GiftCard.class);
                 giftcard.id = snapshot.getKey();
                 giftcards.remove(giftcard);
+                if (currentCategroy.getValue().equals("All") || currentCategroy.getValue().equals(giftcard.category))
+                {
+                    filteredGiftcards.remove(giftcard);
+                }
             }
 
             @Override

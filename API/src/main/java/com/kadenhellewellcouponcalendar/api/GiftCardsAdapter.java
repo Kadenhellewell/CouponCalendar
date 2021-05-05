@@ -27,7 +27,6 @@ public class GiftCardsAdapter extends CustomAdapter<GiftCard> {
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        //TODO set text for text views and on click listeners for buttons
         GiftCard giftCard = data.get(position);
         TextView company = holder.getItemView().findViewById(R.id.company);
         company.setText(giftCard.company);
@@ -36,7 +35,7 @@ public class GiftCardsAdapter extends CustomAdapter<GiftCard> {
         amount.getEditText().setText(Double.toString(giftCard.amount));
 
         TextView exp = holder.getItemView().findViewById(R.id.exp);
-        exp.setText(giftCard.expDateString);
+        exp.setText("Exp. Date:" + giftCard.expDateString);
 
         Button useGiftcard = holder.getItemView().findViewById(R.id.useGiftcard);
         useGiftcard.setOnClickListener(e -> {

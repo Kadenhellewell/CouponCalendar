@@ -82,7 +82,10 @@ public class MapFragment extends Fragment {
                 Log.i("SearchApiExample", "No suggestions found");
             } else {
                 Log.i("SearchApiExample", "Search suggestions: " + suggestions + "\nSelecting first...");
-                searchRequestTask = searchEngine.select(suggestions.get(0), this);
+                for (SearchSuggestion suggestion : suggestions)
+                {
+                    searchRequestTask = searchEngine.select(suggestion, this);
+                }
             }
         }
 
@@ -98,9 +101,7 @@ public class MapFragment extends Fragment {
             // TODO check time or distance when we get to that
             if (result.getCoordinate() != null)
             {
-                System.out.println("Non null coordinate\n");
                 couponLocs.add(result.getCoordinate());
-                System.out.println(result.getCoordinate().toString());
             }
         }
 
@@ -133,11 +134,6 @@ public class MapFragment extends Fragment {
         searchEngine = MapboxSearchSdk.createSearchEngine();
 
 
-        final SearchOptions options = new SearchOptions.Builder()
-                .build();
-
-
-
         mapView = view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
 
@@ -152,6 +148,12 @@ public class MapFragment extends Fragment {
                             activity.requestPermissions(new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, 1);
                         }
 
+                        Location location = manager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                        Log.d("Loc", location.toString());
+                        final SearchOptions options = new SearchOptions.Builder()
+                                .proximity(Point.fromLngLat(location.getLongitude(), location.getLatitude()))
+                                .build();
+
                         for(Coupon coupon : activity.couponViewModel.getCoupons())
                         {
                             searchRequestTask = searchEngine.search(coupon.company, options, searchCallback);
@@ -162,11 +164,7 @@ public class MapFragment extends Fragment {
                         couponLocs.addOnListChangedCallback(new ObservableList.OnListChangedCallback<ObservableList<Point>>() {
                             @Override
                             public void onChanged(ObservableList<Point> sender) {
-                                for(Point point : sender)
-                                {
-                                    markerViewManager.addMarker(createMakrerView(point));
-                                    System.out.println(couponLocs);
-                                }
+
                             }
 
                             @Override
@@ -176,7 +174,11 @@ public class MapFragment extends Fragment {
 
                             @Override
                             public void onItemRangeInserted(ObservableList<Point> sender, int positionStart, int itemCount) {
-
+                                for(int i = positionStart; i < positionStart + itemCount; i++)
+                                {
+                                    markerViewManager.addMarker(createMakrerView(sender.get(i)));
+                                    System.out.println(couponLocs);
+                                }
                             }
 
                             @Override

@@ -18,13 +18,17 @@ import com.kadenhellewellcouponcalendar.api.models.Coupon;
 import com.kadenhellewellcouponcalendar.api.models.User;
 
 public class CouponViewModel extends ViewModel {
-    private ObservableArrayList<Coupon> coupons;
+    private ObservableArrayList<Coupon> coupons = new ObservableArrayList<>();
+    private ObservableArrayList<Coupon> filteredCoupons = new ObservableArrayList<>();
+    public MutableLiveData<String> currentCategory = new MutableLiveData<>();
+    public static final String[] categoryOptions = {"Food", "Shopping", "Miscellaneous"};
     private DatabaseReference db;
     MutableLiveData<User> user;
 
     public CouponViewModel()
     {
         db = FirebaseDatabase.getInstance().getReference();
+        currentCategory.setValue("All");
     }
 
     public void setUser(MutableLiveData<User> user)
@@ -34,12 +38,37 @@ public class CouponViewModel extends ViewModel {
 
     public ObservableArrayList<Coupon> getCoupons()
     {
-        if (coupons == null)
+        if (coupons.size() == 0)
         {
-            coupons = new ObservableArrayList<Coupon>();
             loadCoupons();
         }
         return coupons;
+    }
+
+    public ObservableArrayList<Coupon> getFilteredCoupons()
+    {
+        if (coupons.size() == 0)
+        {
+            loadCoupons();
+        }
+        return filteredCoupons;
+    }
+
+    public ObservableArrayList<Coupon> setCouponFilter(String filter)
+    {
+        if (!currentCategory.getValue().equals(filter))
+        {
+            filteredCoupons.clear();
+            for (Coupon coupon : coupons)
+            {
+                if (coupon.category.equals(filter))
+                {
+                    filteredCoupons.add(coupon);
+                }
+            }
+        }
+
+        return getFilteredCoupons();
     }
 
     private void loadCoupons()
@@ -56,6 +85,10 @@ public class CouponViewModel extends ViewModel {
                 coupon.id = snapshot.getKey();
                 coupon.imageUri = Uri.parse(coupon.uriString);
                 coupons.add(coupon);
+                if (currentCategory.getValue().equals("All") || currentCategory.getValue().equals(coupon.category))
+                {
+                    filteredCoupons.add(coupon);
+                }
             }
 
             @Override
@@ -65,6 +98,11 @@ public class CouponViewModel extends ViewModel {
                 coupon.imageUri = Uri.parse(coupon.uriString);
                 int index = coupons.indexOf(coupon);
                 coupons.set(index, coupon);
+                if (currentCategory.getValue().equals("All") || currentCategory.getValue().equals(coupon.category))
+                {
+                    int index2 = filteredCoupons.indexOf(coupon);
+                    filteredCoupons.set(index2, coupon);
+                }
             }
 
             @Override
@@ -73,6 +111,10 @@ public class CouponViewModel extends ViewModel {
                 coupon.id = snapshot.getKey();
                 coupon.imageUri = Uri.parse(coupon.uriString);
                 coupons.remove(coupon);
+                if (currentCategory.getValue().equals("All") || currentCategory.getValue().equals(coupon.category))
+                {
+                    filteredCoupons.remove(coupon);
+                }
             }
 
             @Override
