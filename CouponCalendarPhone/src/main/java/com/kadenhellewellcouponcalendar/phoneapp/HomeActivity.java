@@ -22,14 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.kadenhellewellcouponcalendar.api.viewmodels.CouponViewModel;
 import com.kadenhellewellcouponcalendar.api.viewmodels.GiftCardViewModel;
 import com.kadenhellewellcouponcalendar.api.viewmodels.UserViewModel;
-import com.mapbox.mapboxsdk.Mapbox;
-import com.mapbox.search.MapboxSearchSdk;
-import com.mapbox.search.ResponseInfo;
-import com.mapbox.search.SearchEngine;
-import com.mapbox.search.SearchRequestTask;
-import com.mapbox.search.SearchSelectionCallback;
-import com.mapbox.search.result.SearchResult;
-import com.mapbox.search.result.SearchSuggestion;
+
 
 import java.util.List;
 
@@ -47,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         //Set up various mapbox things
-        Mapbox.getInstance(this, getString(R.string.mapbox_access_token));
+
 
         setContentView(R.layout.activity_home);
 
@@ -121,6 +114,4 @@ public class HomeActivity extends AppCompatActivity {
                 .addToBackStack(null)
                 .commit();
     }
-
-
 }
