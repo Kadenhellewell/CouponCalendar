@@ -82,6 +82,7 @@ public class GiftCardsFragment extends Fragment {
         menu.add("Shopping").setOnMenuItemClickListener(item -> {
             // Set adapter for shopping
             activity.giftCardViewModel.setGiftcardFilter("Shopping");
+            //Hello
             return true;
         });
 
